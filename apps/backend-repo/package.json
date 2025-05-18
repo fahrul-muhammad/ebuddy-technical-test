@@ -1,0 +1,25 @@
+{
+  "name": "backend-repo",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/core/app.ts",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./src/core/app.ts",
+    "build": "tsc -b",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/express": "^5.0.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
