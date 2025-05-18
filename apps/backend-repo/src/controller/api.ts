@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { User } from "../entities/user";
 import UserCollection from "../repository/userCollection";
 
 export default class Api {
@@ -21,7 +22,8 @@ export default class Api {
   public updateUserData = async (req: Request, res: Response): Promise<any> => {
     try {
       const { id } = req.params;
-      const newData = req.body;
+      console.log("ID : ", id);
+      const newData: User = req.body;
 
       if (!id || !newData) {
         return res.status(400).json({ message: "Missing id or body data" });

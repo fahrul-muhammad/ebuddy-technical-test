@@ -18,7 +18,7 @@ export default class UserCollection {
         id: doc.id,
         fullName: data.fullName,
         email: data.email,
-        password: data.password,
+        password: "",
       });
     });
 
@@ -26,7 +26,7 @@ export default class UserCollection {
   }
 
   public async updateDataUser(id: string, newData: Partial<UserEntity>): Promise<string> {
-    await this.firestore.collection("users").doc(id).update(newData);
+    await this.firestore.collection("USERS").doc(id).update(newData);
     return `User with ID ${id} updated successfully.`;
   }
 }
