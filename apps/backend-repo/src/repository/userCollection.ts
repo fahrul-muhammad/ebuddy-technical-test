@@ -1,24 +1,32 @@
+import { Firestore } from "firebase-admin/firestore";
 import { User as UserEntity } from "../entities/user";
 
 export default class UserCollection {
-  database: string;
-  constructor(db: string) {
-    this.database = db;
-  }
-  public async getAllUser(): Promise<UserEntity> {
-    const data: UserEntity = {
-      id: "001",
-      fullName: "ebiebi",
-      email: "ebi@email.com",
-      password: "12345",
-      createdAt: new Date(),
-      updateAt: undefined,
-    };
+  private firestore: Firestore;
 
-    return data;
+  constructor(db: Firestore) {
+    this.firestore = db;
   }
 
-  public async updateDataUser(): Promise<any> {
-    return "Hello User";
+  public async getAllUser(): Promise<UserEntity[]> {
+    const snapshot = await this.firestore.collection("USERS").get();
+    const users: UserEntity[] = [];
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      users.push({
+        id: doc.id,
+        fullName: data.fullName,
+        email: data.email,
+        password: data.password,
+      });
+    });
+
+    return users;
+  }
+
+  public async updateDataUser(id: string, newData: Partial<UserEntity>): Promise<string> {
+    await this.firestore.collection("users").doc(id).update(newData);
+    return `User with ID ${id} updated successfully.`;
   }
 }

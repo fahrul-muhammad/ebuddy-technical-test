@@ -1,5 +1,5 @@
-import UserCollection from "apps/backend-repo/src/repository/userCollection";
 import { Request, Response } from "express";
+import UserCollection from "../repository/userCollection";
 
 export default class Api {
   userCollection: UserCollection;
@@ -20,10 +20,19 @@ export default class Api {
 
   public updateUserData = async (req: Request, res: Response): Promise<any> => {
     try {
-      const data = await this.userCollection.updateDataUser();
-      return res.status(200).json(data);
+      const { id } = req.params;
+      const newData = req.body;
+
+      if (!id || !newData) {
+        return res.status(400).json({ message: "Missing id or body data" });
+      }
+
+      const result = await this.userCollection.updateDataUser(id, newData);
+      return res.status(200).json({ message: result });
     } catch (error) {
       console.log(error);
+      return res.status(500).json({ message: "Failed to update user", error });
     }
   };
+}
 }

@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "dotenv": "^16.5.0",
+    "firebase": "^11.7.3",
+    "firebase-admin": "^13.4.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
