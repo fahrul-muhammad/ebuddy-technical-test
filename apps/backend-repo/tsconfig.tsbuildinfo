@@ -1,1 +1,1 @@
-{"root":["./src/controller/api.ts","./src/core/app.ts","./src/entities/user.ts","./src/repository/usercollection.ts","./src/routes/userroutes.ts"],"version":"5.8.3"}
+{"root":["./src/config/firebaseconfig.ts","./src/config/serviceaccount.ts","./src/controller/api.ts","./src/core/app.ts","./src/entities/user.ts","./src/helpers/generatetoken.ts","./src/middleware/auth.ts","./src/repository/usercollection.ts","./src/routes/userroutes.ts"],"version":"5.8.3"}
