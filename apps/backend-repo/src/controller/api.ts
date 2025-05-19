@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../entities/user";
+import { generateToken } from "../helpers/generateToken";
 import UserCollection from "../repository/userCollection";
 
 export default class Api {
@@ -34,6 +35,33 @@ export default class Api {
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Failed to update user", error });
+    }
+  };
+
+  public SingIn = async (req: Request, res: Response): Promise<any> => {
+    try {
+      const { email, password } = req.body;
+      const userData = await this.userCollection.getDataByEmail(email);
+      if (password == userData.password) {
+        return res.status(200).json({ message: "Login Success", token: generateToken(email) });
+      }
+      if (password != userData.password) {
+        return res.status(401).json({ message: "Wrong Email or Password" });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error from server", error });
+    }
+  };
+
+  public SingUp = async (req: Request, res: Response): Promise<any> => {
+    try {
+      const { email, password, fullName } = req.body;
+      await this.userCollection.createData({ email, password, fullName });
+      return res.status(200).json({ message: "User Added Sucsessfully" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error from server", error });
     }
   };
 }

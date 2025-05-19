@@ -4,7 +4,7 @@
   "private": true,
   "main": "./src/core/app.ts",
   "scripts": {
-    "dev": "nodemon --exec ts-node ./src/core/app.ts",
+    "dev": "nodemon --exec ts-node -r dotenv/config ./src/core/app.ts",
     "build": "tsc -b",
     "start": "node dist/index.js"
   },
@@ -13,12 +13,14 @@
     "@repo/typescript-config": "workspace:*",
     "dotenv": "^16.5.0",
     "firebase": "^11.7.3",
-    "firebase-admin": "^13.4.0"
+    "firebase-admin": "^13.4.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
     "npm-run-all": "^4.1.5",

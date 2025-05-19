@@ -29,4 +29,27 @@ export default class UserCollection {
     await this.firestore.collection("USERS").doc(id).update(newData);
     return `User with ID ${id} updated successfully.`;
   }
+
+  public async createData(newData: Partial<UserEntity>): Promise<string> {
+    await this.firestore.collection("USERS").add(newData);
+    return `User added successfully.`;
+  }
+
+  public async getDataByEmail(email: string): Promise<any> {
+    const snapshot = await this.firestore.collection("USERS").where("email", "==", email).limit(1).get();
+    const user: UserEntity = {
+      id: "",
+      fullName: "",
+      email: "",
+      password: "",
+    };
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      user.id = doc.id;
+      user.fullName = data.fullName;
+      user.email = data.email;
+      user.password = data.password;
+    });
+    return user;
+  }
 }

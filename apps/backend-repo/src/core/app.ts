@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
 import express from "express";
 import userRoutes from "../routes/userRoutes";
 
+dotenv.config();
+
 const app = express();
-const PORT = 2020;
+const PORT = 5001;
 
 app.use(express.json());
 app.use(
