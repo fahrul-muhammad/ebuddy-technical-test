@@ -1,13 +1,10 @@
 "use client";
 
 import { Box, Button, Container, Link, Paper, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { LoginUser } from "../store/slices/auth";
-export default function LoginPage() {
-  const dispatch: any = useDispatch();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+import { useRouter } from "next/navigation";
+
+export default function RegisterPage() {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -29,23 +26,15 @@ export default function LoginPage() {
           }}
         >
           <Typography variant="h5" fontWeight="bold" gutterBottom>
-            Log in
+            Sign Up
           </Typography>
 
           <Box component="form" noValidate autoComplete="off" sx={{ mt: 2 }}>
-            <TextField label="Email" type="email" fullWidth variant="outlined" margin="normal" placeholder="joe@email.com" onChange={(e) => setEmail(e.target.value)} />
-            <TextField label="Password" type="password" fullWidth variant="outlined" margin="normal" placeholder="Enter your Password" onChange={(e) => setPassword(e.target.value)} />
-
-            <Box textAlign="right" mt={1}>
-              <Link href="#" underline="hover" variant="body2">
-                forgot password?
-              </Link>
-            </Box>
+            <TextField label="Full Name" type="full name" fullWidth variant="outlined" margin="normal" placeholder="your full name" />
+            <TextField label="Email" type="email" fullWidth variant="outlined" margin="normal" placeholder="joe@email.com" />
+            <TextField label="Password" type="password" fullWidth variant="outlined" margin="normal" placeholder="Enter your Password" />
 
             <Button
-              onClick={() => {
-                dispatch(LoginUser({ email, password }));
-              }}
               fullWidth
               variant="contained"
               sx={{
@@ -58,13 +47,13 @@ export default function LoginPage() {
                 },
               }}
             >
-              Login
+              Sign Up
             </Button>
 
             <Typography variant="body2">
-              Don't have an account?{" "}
-              <Link href="/signup" underline="hover" fontWeight="bold">
-                Register here.
+              Already have an account?{" "}
+              <Link href="/" underline="hover" fontWeight="bold">
+                Login here.
               </Link>
             </Typography>
           </Box>

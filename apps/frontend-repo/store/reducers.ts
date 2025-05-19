@@ -2,10 +2,10 @@ import { Action, combineReducers } from "@reduxjs/toolkit";
 import storage from "./store";
 
 // reducers
-import counterSlice from "./action";
+import authSlice from "./slices/auth";
 
 const combineReducer = combineReducers({
-  [counterSlice.name]: counterSlice.reducer,
+  [authSlice.name]: authSlice.reducer,
 });
 
 export const rootReducer = (state: ReturnType<typeof combineReducer> | undefined, action: Action) => {
@@ -15,5 +15,5 @@ export const rootReducer = (state: ReturnType<typeof combineReducer> | undefined
 export const persistConfig = {
   key: "root",
   storage,
-  whitelist: [""],
+  whitelist: [authSlice.name],
 };

@@ -30,4 +30,4 @@ export const persistor = persistStore(store);
 export const wrapper = createWrapper(makeStore, { debug: true });
 
 // state
-export const selectCounter = (state: RootState) => state.counter;
+export const selectAuthUser = (state: RootState) => state.users;
