@@ -18,7 +18,7 @@ export default class UserCollection {
         id: doc.id,
         fullName: data.fullName,
         email: data.email,
-        password: "",
+        password: data.password,
       });
     });
 
