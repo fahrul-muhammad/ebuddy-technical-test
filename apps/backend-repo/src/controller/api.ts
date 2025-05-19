@@ -23,7 +23,6 @@ export default class Api {
   public updateUserData = async (req: Request, res: Response): Promise<any> => {
     try {
       const { id } = req.params;
-      console.log("ID : ", id);
       const newData: User = req.body;
 
       if (!id || !newData) {
