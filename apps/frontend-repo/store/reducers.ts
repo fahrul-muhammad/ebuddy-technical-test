@@ -2,10 +2,16 @@ import { Action, combineReducers } from "@reduxjs/toolkit";
 import storage from "./store";
 
 // reducers
-import authSlice from "./slices/auth";
+import editUserSlice from "./slices/editUsers";
+import getAllUsersSlice from "./slices/getAllUser";
+import loginSlice from "./slices/loginUser";
+import signupSlice from "./slices/signupUser";
 
 const combineReducer = combineReducers({
-  [authSlice.name]: authSlice.reducer,
+  [loginSlice.name]: loginSlice.reducer,
+  [signupSlice.name]: signupSlice.reducer,
+  [getAllUsersSlice.name]: getAllUsersSlice.reducer,
+  [editUserSlice.name]: editUserSlice.reducer,
 });
 
 export const rootReducer = (state: ReturnType<typeof combineReducer> | undefined, action: Action) => {
@@ -15,5 +21,5 @@ export const rootReducer = (state: ReturnType<typeof combineReducer> | undefined
 export const persistConfig = {
   key: "root",
   storage,
-  whitelist: [authSlice.name],
+  whitelist: [loginSlice.name, getAllUsersSlice.name],
 };

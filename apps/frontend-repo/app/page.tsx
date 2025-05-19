@@ -1,13 +1,23 @@
 "use client";
 
 import { Box, Button, Container, Link, Paper, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { LoginUser } from "../store/slices/auth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthUser } from "../store";
+import { LoginState, LoginUser } from "../store/slices/loginUser";
 export default function LoginPage() {
   const dispatch: any = useDispatch();
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const authData: LoginState = useSelector(selectAuthUser);
+
+  useEffect(() => {
+    if (authData.isSuccess) {
+      return router.push("/dashboard");
+    }
+  }, [authData.isSuccess]);
   return (
     <Box
       sx={{
@@ -35,7 +45,11 @@ export default function LoginPage() {
           <Box component="form" noValidate autoComplete="off" sx={{ mt: 2 }}>
             <TextField label="Email" type="email" fullWidth variant="outlined" margin="normal" placeholder="joe@email.com" onChange={(e) => setEmail(e.target.value)} />
             <TextField label="Password" type="password" fullWidth variant="outlined" margin="normal" placeholder="Enter your Password" onChange={(e) => setPassword(e.target.value)} />
-
+            {authData.error !== null ? (
+              <Typography color="error" variant="body2">
+                {authData.error}
+              </Typography>
+            ) : null}
             <Box textAlign="right" mt={1}>
               <Link href="#" underline="hover" variant="body2">
                 forgot password?
@@ -58,7 +72,7 @@ export default function LoginPage() {
                 },
               }}
             >
-              Login
+              {authData.isLoading ? "Loading..." : "Login"}
             </Button>
 
             <Typography variant="body2">

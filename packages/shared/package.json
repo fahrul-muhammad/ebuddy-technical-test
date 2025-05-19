@@ -1,0 +1,14 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "description": "shared module",
+  "main": "./dist/index.js",
+  "types": "./index.ts",
+  "exports": "./index.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

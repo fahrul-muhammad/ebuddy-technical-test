@@ -31,3 +31,6 @@ export const wrapper = createWrapper(makeStore, { debug: true });
 
 // state
 export const selectAuthUser = (state: RootState) => state.users;
+export const selectSignUpUser = (state: RootState) => state.signup;
+export const selectUsersData = (state: RootState) => state.usersdata;
+export const selectUpdateData = (state: RootState) => state.edituser;

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { UserLogin, UserSignUp } from "shared";
 
-export const LoginUser = createAsyncThunk("api/signin", async (payload: { email: string; password: string }, { fulfillWithValue, rejectWithValue }) => {
+export const LoginUser = createAsyncThunk("api/signin", async (payload: UserLogin, { fulfillWithValue, rejectWithValue }) => {
   try {
     const response = await axios.post("api/signin", {
       email: payload.email,
@@ -17,23 +18,40 @@ export const LoginUser = createAsyncThunk("api/signin", async (payload: { email:
   }
 });
 
-export interface UserState {
+export const RegisterUser = createAsyncThunk("api/signup", async (payload: UserSignUp, { fulfillWithValue, rejectWithValue }) => {
+  try {
+    const response = await axios.post("api/signup", {
+      email: payload.email,
+      password: payload.password,
+      fullName: payload.fullName,
+    });
+    return fulfillWithValue(response.data);
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});
+
+export interface LoginState {
   isLoading: boolean;
   isSuccess: boolean;
   error: string | null;
   token: string;
 }
 
-const initialState: UserState = {
+const loginState: LoginState = {
   token: "",
   isLoading: false,
   isSuccess: false,
   error: null,
 };
 
-const userSlice = createSlice({
+const loginSlice = createSlice({
   name: "users",
-  initialState: initialState,
+  initialState: loginState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -57,4 +75,4 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice;
+export default loginSlice;
