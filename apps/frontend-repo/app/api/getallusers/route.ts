@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const response = await fetch("http://localhost:5001/fetch-user-data", {
+    const response = await fetch(`${process.env.LOCAL_HOST}/fetch-user-data`, {
       method: "GET",
       headers: { "Content-Type": "application/json", Authorization: req.headers.get("Authorization") as string },
     });

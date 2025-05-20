@@ -1,4 +1,3 @@
-// config/firebaseConfig.ts
 import { credential, ServiceAccount } from "firebase-admin";
 import { initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
