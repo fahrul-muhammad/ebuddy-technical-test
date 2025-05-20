@@ -2,11 +2,15 @@
   "name": "backend-repo",
   "version": "0.0.0",
   "private": true,
-  "main": "./src/core/app.ts",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node -r dotenv/config ./src/core/app.ts",
+    "serve": "pnpm run build && firebase emulators:start --only functions",
     "build": "tsc -b",
     "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": "22"
   },
   "dependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -15,6 +19,7 @@
     "dotenv": "^16.5.0",
     "firebase": "^11.7.3",
     "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.3.2",
     "jsonwebtoken": "^9.0.2",
     "shared": "workspace:^"
   },
@@ -25,6 +30,7 @@
     "@types/express": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "express": "^5.1.0",
+    "firebase-functions-test": "^3.4.1",
     "nodemon": "^3.1.10",
     "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.2",

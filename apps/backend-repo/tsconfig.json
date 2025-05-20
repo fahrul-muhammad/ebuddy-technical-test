@@ -1,6 +1,9 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src"
   }
